@@ -15,8 +15,9 @@ export function CreateInvoice() {
 
 export function UpdateInvoice({ id }: { id: string }) {
   return (
+    // 請求書idを使用したリンクに変更
     <Link
-      href="/dashboard/invoices"
+      href={`/dashboard/invoices/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
