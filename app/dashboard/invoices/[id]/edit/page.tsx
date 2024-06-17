@@ -4,6 +4,7 @@
 import Form from '@/app/ui/invoices/edit-form';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
+import { notFound } from 'next/navigation';
 
 // 新規作成ページとほとんど同じだが、あらかじめ入力された請求書の情報を表示する点が異なる
 export default async function Page({ params }: { params: { id: string } }) {
@@ -12,6 +13,12 @@ export default async function Page({ params }: { params: { id: string } }) {
         fetchInvoiceById(id),
         fetchCustomers(),
     ]);
+
+    // 請求書が見つからない場合の処理
+    if (!invoice) {
+        notFound();
+    }
+
     return (
         <main>
             <Breadcrumbs
